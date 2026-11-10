@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>STEP IN STEP — танцевальная студия | Таганрог</title>
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #1A1A1A;
+      color: #fff;
+      font-family: 'Impact', 'Arial Black', 'Helvetica Bold', sans-serif;
+      line-height: 1.3;
+      overflow-x: hidden;
+    }
+
+    /* Системные шрифты – только Impact, Arial Black, sans-serif */
+    h1, h2, h3, h4, .logo, .btn, nav a {
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    p, li, input, select, button, .plain-text, .price-desc, .rule-text, .footer-text {
+      font-family: 'Arial Black', 'Arial Bold', 'Helvetica Bold', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    /* ----- ЦВЕТА ----- */
+    :root {
+      --orange: #FF6B00;
+      --black: #1A1A1A;
+      --white: #FFFFFF;
+      --gray: #2E2E2E;
+      --gray-light: #5A5A5A;
+    }
+
+    /* ----- ОБЩИЕ КОНТЕЙНЕРЫ ----- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    /* ----- АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ----- HEADER (STICKY) ----- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(26, 26, 26, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--orange);
+      transition: box-shadow 0.3s;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 28px;
+      color: var(--white);
+      text-shadow: 4px 4px 0 var(--orange), 8px 8px 0 rgba(255, 107, 0, 0.3);
+      transform: rotate(-2deg);
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .logo:hover {
+      transform: rotate(2deg) scale(1.02);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 18px;
+      padding: 8px 0;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    /* Мобильное меню — упрощённое, без бургера (по заданию нет) */
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      nav ul {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        font-size: 16px;
+      }
+      .logo {
+        font-size: 24px;
+      }
+    }
+
+    /* ----- HERO ----- */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at 70% 30%, #2A1A0A 0%, #1A1A1A 80%);
+      position: relative;
+      overflow: hidden;
+      padding: 40px 0;
+    }
+
+    /* Граффити-фон (имитация) */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" opacity="0.08"><path d="M50 200 Q150 50 250 200 T350 250" stroke="%23FF6B00" stroke-width="8" fill="none"/><path d="M30 300 Q120 180 200 300 T380 330" stroke="%23FF6B00" stroke-width="6" fill="none"/><circle cx="80" cy="80" r="30" fill="%23FF6B00"/><rect x="300" y="50" width="60" height="60" fill="%23FF6B00" transform="rotate(25 330 80)"/></svg>');
+      background-size: cover;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text {
+      flex: 1 1 50%;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(44px, 8vw, 92px);
+      line-height: 0.95;
+      color: var(--white);
+      text-shadow: 6px 6px 0 var(--orange), 12px 12px 0 rgba(0, 0, 0, 0.5);
+      margin-bottom: 24px;
+    }
+
+    .hero-text .sub-slogan {
+      font-size: clamp(18px, 3vw, 28px);
+      color: var(--orange);
+      font-family: 'Arial Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 32px;
+      text-shadow: 0 0 10px rgba(255, 107, 0, 0.6);
+    }
+
+    /* Маскот — тыква */
+    .mascot-block {
+      flex: 0 0 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(0 0 25px rgba(255, 107, 0, 0.5));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .mascot-svg {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background-color: var(--orange);
+      color: var(--black);
+      font-size: 24px;
+      padding: 18px 42px;
+      border: none;
+      border-radius: 0;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      letter-spacing: 2px;
+      box-shadow: 8px 8px 0 #000;
+      transition: 0.15s ease;
+      cursor: pointer;
+      border: 2px solid var(--black);
+    }
+
+    .cta-btn:hover {
+      transform: translate(4px, 4px);
+      box-shadow: 4px 4px 0 #000;
+      background-color: #ff8c2e;
+    }
+
+    .cta-btn:active {
+      transform: translate(8px, 8px);
+      box-shadow: 0 0 0 #000;
+    }
+
+    /* ----- SECTION TITLES ----- */
+    .section-title {
+      font-size: clamp(36px, 6vw, 60px);
+      color: var(--white);
+      margin-bottom: 48px;
+      position: relative;
+      display: inline-block;
+      text-shadow: 4px 4px 0 var(--orange);
+      letter-spacing: 2px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 80%;
+      height: 6px;
+      background: var(--orange);
+    }
+
+    /* ----- НАПРАВЛЕНИЯ (СЕТКА) ----- */
+    .directions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .direction-card {
+      background-color: var(--gray);
+      border: 3px solid var(--black);
+      padding: 28px 16px;
+      transition: all 0.25s ease;
+      box-shadow: 8px 8px 0 #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: default;
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .direction-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .direction-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .direction-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0 var(--orange);
+      border-color: var(--orange);
+      background-color: #222;
+    }
+
+    .direction-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 6px var(--orange));
+    }
+
+    .direction-card h3 {
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .age-badge {
+      background-color: var(--orange);
+      color: var(--black);
+      font-family: 'Arial Black', sans-serif;
+      font-size: 14px;
+      padding: 6px 14px;
+      display: inline-block;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 1px;
+      border: 2px solid var(--black);
+    }
+
+    /* ----- РАСПИСАНИЕ ----- */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .day-card {
+      background-color: var(--gray);
+      border: 3px solid var(--black);
+      padding: 20px 18px;
+      box-shadow: 6px 6px 0 #000;
+      transition: transform 0.15s;
+      border-radius: 0;
+    }
+
+    .day-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--orange);
+    }
+
+    .day-title {
+      font-size: 28px;
+      color: var(--orange);
+      margin-bottom: 16px;
+      border-bottom: 3px solid var(--orange);
+      padding-bottom: 6px;
+      text-transform: uppercase;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+    }
+
+    /* Сетка карточек занятий: 1 колонка на мобильном, 2 на десктопе */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .lessons-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Карточка одного занятия */
+    .lesson-card {
+      background-color: #222;
+      border: 2px solid var(--black);
+      padding: 12px 14px;
+      box-shadow: 4px 4px 0 #000;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-family: 'Arial Black', sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      border-radius: 0;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .lesson-card:hover {
+      border-color: var(--orange);
+      transform: translate(-1px, -1px);
+    }
+
+    .lesson-time {
+      color: var(--orange);
+      font-weight: 900;
+      display: block;
+      font-size: 15px;
+    }
+
+    .lesson-name {
+      color: var(--white);
+      font-weight: 900;
+      display: block;
+    }
+
+    .lesson-group {
+      color: #ccc;
+      font-size: 14px;
+      font-weight: 700;
+      display: block;
+    }
+
+    /* ----- ЦЕНЫ ----- */
+    .prices-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .price-card {
+      background-color: var(--gray);
+      border: 4px solid var(--black);
+      padding: 40px 32px;
+      min-width: 260px;
+      flex: 1 1 260px;
+      box-shadow: 12px 12px 0 #000;
+      transition: all 0.2s;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .price-card:hover {
+      border-color: var(--orange);
+      box-shadow: 12px 12px 0 var(--orange);
+      transform: translate(-4px, -4px);
+    }
+
+    .price-card h3 {
+      font-size: 34px;
+      color: var(--white);
+      margin-bottom: 16px;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+    }
+
+    .price-value {
+      font-size: 56px;
+      color: var(--orange);
+      line-height: 1;
+      margin: 16px 0;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    .price-desc {
+      color: #ddd;
+      font-size: 16px;
+      margin-bottom: 16px;
+      font-family: 'Arial Black', sans-serif;
+    }
+
+    .discount-info {
+      background-color: var(--orange);
+      color: var(--black);
+      padding: 24px 28px;
+      margin-top: 40px;
+      border: 4px solid var(--black);
+      box-shadow: 10px 10px 0 #000;
+      font-family: 'Arial Black', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 0;
+    }
+
+    .discount-info span {
+      display: inline-block;
+      background: var(--black);
+      color: var(--orange);
+      padding: 4px 12px;
+      margin: 0 8px;
+      border: 2px solid var(--orange);
+    }
+
+    /* ----- ФОРМА ЗАПИСИ ----- */
+    .form-section {
+      background: linear-gradient(145deg, #1f1f1f 0%, #121212 100%);
+      border-top: 4px solid var(--orange);
+      border-bottom: 4px solid var(--orange);
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: var(--gray);
+      padding: 48px 40px;
+      border: 4px solid var(--black);
+      box-shadow: 16px 16px 0 #000;
+      border-radius: 0;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 18px;
+      color: var(--orange);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 18px 20px;
+      min-height: 44px;
+      background-color: #000;
+      border: 3px solid #333;
+      color: #fff;
+      font-size: 18px;
+      font-family: 'Arial Black', sans-serif;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23FF6B00" stroke-width="3" stroke-linecap="square"><polyline points="6 9 12 15 18 9"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 20px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.4);
+    }
+
+    select option {
+      background-color: #1A1A1A;
+      color: #fff;
+    }
+
+    .form-container .cta-btn {
+      width: 100%;
+      font-size: 28px;
+      padding: 22px;
+      box-shadow: 8px 8px 0 #000;
+    }
+
+    /* Мелкий текст под кнопкой формы */
+    .form-note {
+      margin-top: 16px;
+      text-align: center;
+      color: var(--gray-light);
+      font-size: 14px;
+      font-family: 'Arial Black', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* ----- ПРАВИЛА ----- */
+    .rules-list {
+      list-style: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .rules-list li {
+      background-color: var(--gray);
+      border-left: 12px solid var(--orange);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      line-height: 1.5;
+      box-shadow: 6px 6px 0 #000;
+      font-family: 'Arial Black', sans-serif;
+      border-radius: 0;
+      transition: transform 0.1s;
+      color: #f0f0f0;
+    }
+
+    .rules-list li:hover {
+      transform: translateX(6px);
+      background-color: #363636;
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      background-color: #0e0e0e;
+      padding: 56px 0 32px;
+      border-top: 4px solid var(--orange);
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 24px;
+      color: var(--orange);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+    }
+
+    .footer-col p, .footer-col a {
+      color: #ccc;
+      font-size: 16px;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 12px;
+      font-family: 'Arial Black', sans-serif;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--orange);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-links a {
+      background: var(--gray);
+      padding: 10px 18px;
+      border: 2px solid var(--orange);
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      font-size: 20px;
+      color: var(--white);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--orange);
+      color: var(--black);
+      transform: scale(1.05);
+    }
+
+    .copyright {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      padding-top: 24px;
+      border-top: 2px solid #2a2a2a;
+      font-family: 'Arial Black', sans-serif;
+    }
+
+    /* ----- TOAST / POPUP ----- */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background-color: var(--orange);
+      color: var(--black);
+      padding: 20px 40px;
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      font-size: 22px;
+      border: 4px solid var(--black);
+      box-shadow: 12px 12px 0 #000;
+      z-index: 999;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 0;
+      max-width: 90vw;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 500px) {
+      .toast {
+        white-space: normal;
+        font-size: 18px;
+        padding: 16px 24px;
+      }
+    }
+
+    /* ----- АДАПТИВ ----- */
+    @media (max-width: 900px) {
+      .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .mascot-block {
+        flex: 0 0 220px;
+      }
+      .hero-text h1 {
+        text-shadow: 4px 4px 0 var(--orange);
+      }
+      .cta-btn {
+        font-size: 20px;
+        padding: 16px 28px;
+      }
+      .section-title {
+        font-size: 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 56px 0;
+      }
+      .form-container {
+        padding: 32px 20px;
+      }
+      .price-card {
+        padding: 28px 16px;
+      }
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .social-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* убираем стандартный вид select в Firefox */
+    select {
+      -moz-appearance: none;
+      text-indent: 0.01px;
+      text-overflow: '';
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">STEP IN STEP</div>
+      <nav>
+        <ul>
+          <li><a href="#directions">Направления</a></li>
+          <li><a href="#schedule">Расписание</a></li>
+          <li><a href="#prices">Цены</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-text fade-up">
+          <h1>ТАНЦУЙ,<br>ПОКА<br>МОЛОДОЙ!</h1>
+          <p class="sub-slogan">STEP IN STEP — твой шаг в уличную культуру</p>
+          <a href="#signup" class="cta-btn">Записаться на пробное</a>
+        </div>
+        <div class="mascot-block fade-up">
+          <!-- Маскот: человек в маске тыквы (стилизованный SVG) -->
+          <svg class="mascot-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- тело / hoodie -->
+            <rect x="80" y="160" width="140" height="110" rx="10" fill="#2E2E2E" stroke="#FF6B00" stroke-width="4"/>
+            <!-- руки -->
+            <rect x="40" y="180" width="50" height="30" rx="10" fill="#2E2E2E" stroke="#FF6B00" stroke-width="4"/>
+            <rect x="210" y="180" width="50" height="30" rx="10" fill="#2E2E2E" stroke="#FF6B00" stroke-width="4"/>
+            <!-- маска тыквы -->
+            <ellipse cx="150" cy="110" rx="70" ry="60" fill="#FF6B00" stroke="#1A1A1A" stroke-width="6"/>
+            <!-- глаза -->
+            <polygon points="120,95 135,85 145,100 130,110" fill="#1A1A1A"/>
+            <polygon points="180,95 165,85 155,100 170,110" fill="#1A1A1A"/>
+            <!-- улыбка -->
+            <path d="M110 130 Q150 170 190 130" stroke="#1A1A1A" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <line x1="130" y1="135" x2="130" y2="150" stroke="#1A1A1A" stroke-width="5"/>
+            <line x1="150" y1="140" x2="150" y2="155" stroke="#1A1A1A" stroke-width="5"/>
+            <line x1="170" y1="135" x2="170" y2="150" stroke="#1A1A1A" stroke-width="5"/>
+            <!-- стебель -->
+            <rect x="145" y="45" width="10" height="25" fill="#2E7D32" stroke="#1A1A1A" stroke-width="3"/>
+            <path d="M150 45 Q160 30 175 35" stroke="#2E7D32" stroke-width="5" fill="none"/>
+            <!-- кроссовки -->
+            <rect x="95" y="260" width="45" height="25" rx="8" fill="#1A1A1A" stroke="#FF6B00" stroke-width="3"/>
+            <rect x="160" y="260" width="45" height="25" rx="8" fill="#1A1A1A" stroke="#FF6B00" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- НАПРАВЛЕНИЯ -->
+    <section id="directions">
+      <div class="container">
+        <h2 class="section-title fade-up">НАПРАВЛЕНИЯ</h2>
+        <div class="directions-grid">
+          <div class="direction-card fade-up">
+            <div class="direction-icon">🎤</div>
+            <h3>Hip-Hop</h3>
+            <span class="age-badge">без ограничений</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">🔥</div>
+            <h3>Dancehall</h3>
+            <span class="age-badge">12+</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">✨</div>
+            <h3>K-Pop</h3>
+            <span class="age-badge">12+</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">🏠</div>
+            <h3>House</h3>
+            <span class="age-badge">без ограничений</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">💃</div>
+            <h3>Female Choreo</h3>
+            <span class="age-badge">18+</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">🎷</div>
+            <h3>Jazz Funk</h3>
+            <span class="age-badge">без ограничений</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">🛹</div>
+            <h3>Street Freestyle</h3>
+            <span class="age-badge">без ограничений</span>
+          </div>
+          <div class="direction-card fade-up">
+            <div class="direction-icon">🧒</div>
+            <h3>Choreo</h3>
+            <span class="age-badge">9-14 лет</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- РАСПИСАНИЕ -->
+    <section id="schedule">
+      <div class="container">
+        <h2 class="section-title fade-up">РАСПИСАНИЕ</h2>
+        <div class="schedule-grid">
+          <!-- ПН -->
+          <div class="day-card fade-up">
+            <div class="day-title">ПН</div>
+            <div class="lessons-grid">
+              <div class="lesson-card"><span class="lesson-name">Street Freestyle</span><span class="lesson-time">17:30–18:30</span><span class="lesson-group">начинашки от 5 лет</span></div>
+              <div class="lesson-card"><span class="lesson-name">Street Freestyle</span><span class="lesson-time">18:30–19:30</span><span class="lesson-group">продолжающие</span></div>
+              <div class="lesson-card"><span class="lesson-name">Jazz Funk</span><span class="lesson-time">18:00–19:00</span><span class="lesson-group">продолжающие</span></div>
+              <div class="lesson-card"><span class="lesson-name">Jazz Funk</span><span class="lesson-time">19:00–20:00</span><span class="lesson-group">начинашки</span></div>
+              <div class="lesson-card"><span class="lesson-name">Dancehall (детская)</span><span class="lesson-time">17:00–18:00</span></div>
+            </div>
+          </div>
+          <!-- ВТ -->
+          <div class="day-card fade-up">
+            <div class="day-title">ВТ</div>
+            <div class="lessons-grid">
+              <div class="lesson-card"><span class="lesson-name">Hip-Hop</span><span class="lesson-time">18:00–19:30</span></div>
+              <div class="lesson-card"><span class="lesson-name">House</span><span class="lesson-time">19:30–21:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Female Choreo</span><span class="lesson-time">20:00–21:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Choreo (детская)</span><span class="lesson-time">19:00–20:00</span></div>
+            </div>
+          </div>
+          <!-- СР -->
+          <div class="day-card fade-up">
+            <div class="day-title">СР</div>
+            <div class="lessons-grid">
+              <div class="lesson-card"><span class="lesson-name">Street Freestyle</span><span class="lesson-time">17:30–18:30</span><span class="lesson-group">начинашки от 5 лет</span></div>
+              <div class="lesson-card"><span class="lesson-name">Street Freestyle</span><span class="lesson-time">18:30–19:30</span><span class="lesson-group">продолжающие</span></div>
+              <div class="lesson-card"><span class="lesson-name">Jazz Funk</span><span class="lesson-time">18:00–19:00</span><span class="lesson-group">продолжающие</span></div>
+              <div class="lesson-card"><span class="lesson-name">Jazz Funk</span><span class="lesson-time">19:00–20:00</span><span class="lesson-group">начинашки</span></div>
+              <div class="lesson-card"><span class="lesson-name">K-Pop</span><span class="lesson-time">19:30–21:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Dancehall</span><span class="lesson-time">20:00–21:00</span></div>
+            </div>
+          </div>
+          <!-- ЧТ -->
+          <div class="day-card fade-up">
+            <div class="day-title">ЧТ</div>
+            <div class="lessons-grid">
+              <div class="lesson-card"><span class="lesson-name">Hip-Hop</span><span class="lesson-time">18:00–19:30</span></div>
+              <div class="lesson-card"><span class="lesson-name">House</span><span class="lesson-time">19:30–21:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Female Choreo</span><span class="lesson-time">20:00–21:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Choreo (детская)</span><span class="lesson-time">19:00–20:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Dancehall (детская)</span><span class="lesson-time">17:00–18:00</span></div>
+            </div>
+          </div>
+          <!-- ПТ -->
+          <div class="day-card fade-up">
+            <div class="day-title">ПТ</div>
+            <div class="lessons-grid">
+              <div class="lesson-card"><span class="lesson-name">Street Freestyle</span><span class="lesson-time">17:30–18:30</span><span class="lesson-group">начинашки от 5 лет</span></div>
+              <div class="lesson-card"><span class="lesson-name">Street Freestyle</span><span class="lesson-time">18:30–19:30</span><span class="lesson-group">продолжающие</span></div>
+              <div class="lesson-card"><span class="lesson-name">K-Pop</span><span class="lesson-time">19:30–21:00</span></div>
+              <div class="lesson-card"><span class="lesson-name">Dancehall</span><span class="lesson-time">20:00–21:00</span></div>
+            </div>
+          </div>
+          <!-- СБ -->
+          <div class="day-card fade-up">
+            <div class="day-title">СБ</div>
+            <div class="lessons-grid">
+              <div class="lesson-card"><span class="lesson-name">K-Pop</span><span class="lesson-time">16:30–18:00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЦЕНЫ -->
+    <section id="prices">
+      <div class="container">
+        <h2 class="section-title fade-up">ЦЕНЫ И АБОНЕМЕНТЫ</h2>
+        <div class="prices-wrapper">
+          <div class="price-card fade-up">
+            <h3>8 ЗАНЯТИЙ</h3>
+            <div class="price-value">4 500 ₽</div>
+            <p class="price-desc">2 раза в неделю<br>срок действия 28 дней</p>
+          </div>
+          <div class="price-card fade-up">
+            <h3>12 ЗАНЯТИЙ</h3>
+            <div class="price-value">6 000 ₽</div>
+            <p class="price-desc">3 раза в неделю<br>срок действия 28 дней</p>
+          </div>
+          <div class="price-card fade-up">
+            <h3>РАЗОВОЕ</h3>
+            <div class="price-value">700 ₽</div>
+            <p class="price-desc">одно посещение<br>любого направления</p>
+          </div>
+        </div>
+        <div class="discount-info fade-up">
+          СКИДКИ: 2-й абонемент — <span>–300 ₽</span> &nbsp;|&nbsp; 3-й абонемент — <span>–500 ₽</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФОРМА ЗАПИСИ -->
+    <section id="signup" class="form-section">
+      <div class="container">
+        <h2 class="section-title fade-up" style="margin-left: 0;">ЗАПИСЬ НА ПРОБНОЕ</h2>
+        <div class="form-container fade-up">
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" placeholder="Как тебя зовут?" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+            <div class="form-group">
+              <label for="direction">Направление</label>
+              <select id="direction" name="direction" required>
+                <option value="" disabled selected>Выбери направление</option>
+                <option>Hip-Hop</option>
+                <option>Dancehall</option>
+                <option>K-Pop</option>
+                <option>House</option>
+                <option>Female Choreo</option>
+                <option>Jazz Funk</option>
+                <option>Street Freestyle</option>
+                <option>Choreo (9-14 лет)</option>
+              </select>
+            </div>
+            <button type="submit" class="cta-btn">Записаться</button>
+            <p class="form-note">Перезвоним в течение 15 минут</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРАВИЛА ПОСЕЩЕНИЯ -->
+    <section id="rules">
+      <div class="container">
+        <h2 class="section-title fade-up">ПРАВИЛА ПОСЕЩЕНИЯ</h2>
+        <ul class="rules-list">
+          <li class="fade-up">Перенос на другую группу возможен только по согласованию с администратором.</li>
+          <li class="fade-up">Пропущенное занятие сгорает и не переносится (независимо от причины).</li>
+          <li class="fade-up">Абонемент действует по низкой цене при условии регулярного посещения без пропусков.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="contacts">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col fade-up">
+          <h4>КОНТАКТЫ</h4>
+          <p>г. Таганрог, ул. Петровская, 45</p>
+          <p>+7 (988) 123-45-67</p>
+          <p>stepin.step@dance.ru</p>
+        </div>
+        <div class="footer-col fade-up">
+          <h4>СОЦСЕТИ</h4>
+          <div class="social-links">
+            <a href="#" target="_blank">Telegram</a>
+            <a href="#" target="_blank">VK</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2026 STEP IN STEP — танцевальная студия. Все права защищены.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Всплывающее сообщение -->
+  <div id="toast" class="toast">Спасибо! Мы свяжемся с вами в ближайшее время.</div>
+
+  <script>
+    (function() {
+      // ----- АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ -----
+      const fadeElements = document.querySelectorAll('.fade-up');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      fadeElements.forEach(el => observer.observe(el));
+
+      // ----- ОБРАБОТКА ФОРМЫ -----
+      const form = document.getElementById('signupForm');
+      const toast = document.getElementById('toast');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Проверка простых валидаций (required уже работает)
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const direction = document.getElementById('direction').value;
+
+        if (!name || !phone || !direction) {
+          alert('Пожалуйста, заполните все поля формы.');
+          return;
+        }
+
+        // Показываем всплывающее сообщение
+        toast.classList.add('show');
+
+        // Сброс формы (по желанию)
+        form.reset();
+
+        // Скрываем сообщение через 3.5 секунды
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3500);
+      });
+
+      // Плавная прокрутка (дублируется через CSS scroll-behavior, но добавим и для кнопок)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
